@@ -85,14 +85,15 @@ if page == pages[2]:
     from sklearn.svm import SVC
     from sklearn.linear_model import LogisticRegression
     from sklearn.metrics import confusion_matrix
+    import pickle
     
     def prediction(classifier):
-        if classifier == 'Random Forest':
-            clf = RandomForestClassifier()
+        if classifier == 'Random Forest':        
+            clf = pickle.load(open("model_RandomForestClassifier", 'rb'))
         elif classifier == 'SVC':
-            clf = SVC()
+            clf = pickle.load(open("model_SVC", 'rb'))
         elif classifier == 'Logistic Regression':
-            clf = LogisticRegression()
+            clf = pickle.load(open("model_LogisticRegression", 'rb'))
         clf.fit(X_train, y_train)
         return clf
     
@@ -105,7 +106,7 @@ if page == pages[2]:
     choix = ['Random Forest', 'SVC', 'Logistic Regression']
     option = st.selectbox('Choix du modèle', choix)
     st.write('Le modèle choisi est :', option)
-
+    
     clf = prediction(option)
     display = st.radio('Que souhaitez-vous montrer ?', ('Accuracy', 'Confusion matrix'))
     if display == 'Accuracy':
