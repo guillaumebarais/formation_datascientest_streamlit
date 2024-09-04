@@ -94,7 +94,6 @@ if page == pages[2]:
             clf = pickle.load(open("model_SVC", 'rb'))
         elif classifier == 'Logistic Regression':
             clf = pickle.load(open("model_LogisticRegression", 'rb'))
-        clf.fit(X_train, y_train)
         return clf
     
     def scores(clf, choice):
